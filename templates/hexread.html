@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+<head>
+	{% block javascript %}
+		<link rel="stylesheet" href="{{ url_for('static', filename='js/editor.md/css/editormd.min.css') }}" />
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.5.0/showdown.min.js"></script>
+		<script type="text/javascript">
+			$(function() {
+				var input = $('#contentHidden').text();
+				var converter = new showdown.Converter();
+				var htmlOutput = converter.makeHtml(input);
+				$('#contentVisible').html(htmlOutput);
+			});
+		</script>
+	{% endblock %}
+	<title>{{ id }}</title>
+</head>
+<body>
+	<div id="contentHidden" style="display:none">{{ content }}</div>
+	<div id="contentVisible"></div>
+	<button type="button" onclick="$(location).attr('href', '{{ url_for('hex', hex_id=id) + '?mode=edit' }}');">Edit</button>
+	<button type="button" onclick="$(location).attr('href', '{{ url_for('map') }}');">Back to Map</buton>
+</body>
+</html>
