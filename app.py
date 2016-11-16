@@ -9,7 +9,7 @@ from pymongo import ReturnDocument
 import requests
 from random import randint
 
-app = Flask('Daserit')
+app = Flask(__name__)
 client = MongoClient('mongodb://localhost:27017/')
 db = client.Daserit
 
@@ -82,3 +82,8 @@ def fetch_hex(x,y):
     # Has to be a string because its too big for mongo
     hex_id = '1' + ''.join(['{0:0>4}'.format(int(hex_coords[x])) for x in ['i', 'j', 'x', 'y']])
     return hex_id
+    
+    
+    
+if __name__ == "__main__":
+    app.run(host='0.0.0.0')
