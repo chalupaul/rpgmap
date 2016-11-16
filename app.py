@@ -19,6 +19,11 @@ app = Flask(__name__)
 client = MongoClient(db_url)
 db = client[db_name]
 
+@app.route('/')
+def index():
+    world_name = config_parser.get('world', 'worldname')
+    return render_template('index.html', world_name=world_name)
+
 @app.route('/map')
 def map():
     return render_template('map.html')
