@@ -90,3 +90,4 @@ ENV/
 
 # Project files
 db/
+venv/
