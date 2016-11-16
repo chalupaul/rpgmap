@@ -11,7 +11,7 @@ from random import randint
 
 app = Flask(__name__)
 client = MongoClient('mongodb://localhost:27017/')
-db = client.Daserit
+db = client.rpgmap
 
 @app.route('/map')
 def map():
