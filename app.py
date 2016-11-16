@@ -1,3 +1,4 @@
+import ConfigParser
 from flask import Flask
 from flask import redirect
 from flask import url_for
@@ -9,9 +10,14 @@ from pymongo import ReturnDocument
 import requests
 from random import randint
 
+config_parser = ConfigParser.RawConfigParser()
+config_file = r'config.ini'
+config_parser.read(config_file)
+db_url = config_parser.get('database', 'url')
+db_name = config_parser.get('database', 'dbname')
 app = Flask(__name__)
-client = MongoClient('mongodb://localhost:27017/')
-db = client.rpgmap
+client = MongoClient(db_url)
+db = client[db_name]
 
 @app.route('/map')
 def map():
